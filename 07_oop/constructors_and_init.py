@@ -7,6 +7,7 @@ class Chai_order:
     def summary(self):
         return f"Tea: {self.tea}, Milk: {self.milk}, Sugar: {self.sugar}"
 
+
 order1 = Chai_order("Darjeeling", "Yes", "Low")
 print(order1.summary())
 

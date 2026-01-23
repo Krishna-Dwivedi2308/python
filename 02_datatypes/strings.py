@@ -1,10 +1,10 @@
-# note that strings are 'immutable' 
+# note that strings are 'immutable'
 
-str1="hello"
+str1 = "hello"
 print(str1)
 print(id(str1))
 
-str1="world"
+str1 = "world"
 print(str1)
 print(id(str1))
 # hello
@@ -12,36 +12,38 @@ print(id(str1))
 # world
 # 2769356376512
 
-print(str1[0]) #w
-print(str1[1]) #o
-print(str1[2]) #r
-print(str1[3]) #l
-print(str1[4]) #d
+print(str1[0])  # w
+print(str1[1])  # o
+print(str1[2])  # r
+print(str1[3])  # l
+print(str1[4])  # d
 # print(str1[5]) #error
-print(str1[0:5]) # world - because the last letter is not inclusive in python like this so we add one more index number so that it prints till the prev index number
+print(
+    str1[0:5]
+)  # world - because the last letter is not inclusive in python like this so we add one more index number so that it prints till the prev index number
 
-print(str1[::-1]) #this will print the string in reverse directly
+print(str1[::-1])  # this will print the string in reverse directly
 
 # ------------------------------------
 # ENCODING AND DECODING
 # ------------------------------------
 
-str1="hello"
-print(str1) #hello
-print(type(str1)) # <class 'str'>
-print(id(str1)) # 2374807738992
+str1 = "hello"
+print(str1)  # hello
+print(type(str1))  # <class 'str'>
+print(id(str1))  # 2374807738992
 
-str1=str1.encode("utf-8")
-print(str1) # b'hello'
-print(type(str1)) # <class 'bytes'>
-print(id(str1)) # 2769356376512
+str1 = str1.encode("utf-8")
+print(str1)  # b'hello'
+print(type(str1))  # <class 'bytes'>
+print(id(str1))  # 2769356376512
 
-str1=str1.decode("utf-8")
-print(str1) # hello
-print(type(str1)) # <class 'str'>
-print(id(str1)) # 2374807967792
-print(id('hello')) # 2374807738992
-print(id('hello')==id(str1)) # False
+str1 = str1.decode("utf-8")
+print(str1)  # hello
+print(type(str1))  # <class 'str'>
+print(id(str1))  # 2374807967792
+print(id("hello"))  # 2374807738992
+print(id("hello") == id(str1))  # False
 
 # Concise Summary
 

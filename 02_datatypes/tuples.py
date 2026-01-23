@@ -9,7 +9,7 @@ masala_tuple = ("cumin", "pepper", "salt")
 
 # Printing the tuple and its type
 print(masala_tuple)
-print(type(masala_tuple))   # <class 'tuple'>
+print(type(masala_tuple))  # <class 'tuple'>
 
 # -------------------------------------------------
 # ❌ INCORRECT APPROACH (commented for reference)
@@ -29,10 +29,10 @@ print(type(masala_tuple))   # <class 'tuple'>
 a, b, c = masala_tuple
 
 # Now the variables are created and hold values
-print(a)   # cumin
-print(b)   # pepper
-print(c)   # salt
+print(a)  # cumin
+print(b)  # pepper
+print(c)  # salt
 
-# now we can also check membership 
-print("salt" in masala_tuple) # True
-print("Salt" in masala_tuple) # False
+# now we can also check membership
+print("salt" in masala_tuple)  # True
+print("Salt" in masala_tuple)  # False

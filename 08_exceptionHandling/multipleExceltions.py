@@ -1,7 +1,7 @@
-def process_order(item,qty):
+def process_order(item, qty):
     try:
-        price={'masala':20}[item]
-        cost=int(price)*int(qty)
+        price = {"masala": 20}[item]
+        cost = int(price) * int(qty)
         print(f"total cost is {cost}")
         print(f"Processing order for {qty} {item} ")
     except KeyError:
@@ -11,6 +11,7 @@ def process_order(item,qty):
     except:
         print("something went wrong")
 
-process_order("masala",2)
-process_order("ginger",2)
-process_order("masala",'two')
+
+process_order("masala", 2)
+process_order("ginger", 2)
+process_order("masala", "two")

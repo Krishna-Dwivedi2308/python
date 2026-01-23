@@ -2,6 +2,7 @@
 #   DOCUMENTING THE FUNCTIIONS AND BUILT-IN FUNCTIONS
 # ----------------------------------------------------
 
+
 def chai_flavour():
     """
     This function returns the chai flavour
@@ -10,16 +11,17 @@ def chai_flavour():
     """
     return "Ginger chai"
 
-print("DOC:",chai_flavour.__doc__)
 
-print("HELP:",help(chai_flavour))
+print("DOC:", chai_flavour.__doc__)
 
-print("NAME:",chai_flavour.__name__)
+print("HELP:", help(chai_flavour))
+
+print("NAME:", chai_flavour.__name__)
 
 # output:
-# DOC: 
+# DOC:
 #     This function returns the chai flavour
-    
+
 # Help on function chai_flavour in module __main__:
 
 # chai_flavour()

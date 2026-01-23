@@ -2,9 +2,11 @@
 # ENUMERATE FUNCTION
 # -------------------------------
 
-list1=['hello','world','python']
-for index,element in enumerate(list1): #enumerate function returns a tuple of index and element like (0,'hello') and we can unpack it like this using two variables 
-    print(index,element)
+list1 = ["hello", "world", "python"]
+for index, element in enumerate(
+    list1
+):  # enumerate function returns a tuple of index and element like (0,'hello') and we can unpack it like this using two variables
+    print(index, element)
 
 # OUTPUT
 # 0 hello
@@ -16,10 +18,10 @@ for index,element in enumerate(list1): #enumerate function returns a tuple of in
 # ZIP FUNCTION
 # -------------------------------
 
-list1=[1,2,3]
-list2=['a','b','c']
-for x,y in zip(list1,list2):
-    print(x,y)
+list1 = [1, 2, 3]
+list2 = ["a", "b", "c"]
+for x, y in zip(list1, list2):
+    print(x, y)
 
 # OUTPUT
 # 1 a

@@ -1,10 +1,10 @@
 sugar_amount = 5
 
-print("id of 1st value",id(sugar_amount))
+print("id of 1st value", id(sugar_amount))
 print(sugar_amount)
 
-sugar_amount =12
-print("id of 2nd value",id(sugar_amount))
+sugar_amount = 12
+print("id of 2nd value", id(sugar_amount))
 print(sugar_amount)
 
 # now the question is whether it chnaged or not ?
@@ -18,7 +18,7 @@ print(sugar_amount)
 # we can see that the reference is changed not the actual value, it just points to a different address now , the initial value "5" is still there somewhere in memory .
 # Hence, 'immutable'
 
-spice_mix=set()
+spice_mix = set()
 print(spice_mix)
 print(id(spice_mix))
 
