@@ -20,10 +20,14 @@ def load_or_create_key():
         with open(key_file, "rb") as f:
             key = f.read()
 
-    return Fernet(key)
+    return Fernet(
+        key
+    )  # This returns a crypto object that knows  How to encrypt and decrypt using this key
 
 
-fernet = load_or_create_key()
+fernet = (
+    load_or_create_key()
+)  # now fernet is your encryption machine for the whole app.
 
 # ---------------- VAULT HANDLING ----------------
 
