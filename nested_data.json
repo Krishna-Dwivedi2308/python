@@ -1,0 +1,80 @@
+{
+  "user": {
+    "id": "u_10293",
+    "profile": {
+      "name": "Alice Johnson",
+      "email": "alice@example.com",
+      "age": 29,
+      "roles": ["admin", "editor"],
+      "preferences": {
+        "theme": "dark",
+        "notifications": {
+          "email": true,
+          "sms": false,
+          "push": true
+        },
+        "languages": ["en", "fr", "de"]
+      }
+    },
+    "sessions": [
+      {
+        "session_id": "s1",
+        "device": "mobile",
+        "ip_addresses": ["192.168.1.10", "10.0.0.5"],
+        "login_times": [
+          "2026-01-20T10:15:00Z",
+          "2026-01-21T08:30:00Z"
+        ]
+      },
+      {
+        "session_id": "s2",
+        "device": "laptop",
+        "ip_addresses": ["172.16.0.2"],
+        "login_times": [
+          "2026-01-22T14:05:00Z"
+        ]
+      }
+    ]
+  },
+  "orders": [
+    {
+      "order_id": "o_5001",
+      "status": "shipped",
+      "items": [
+        {
+          "product_id": "p_101",
+          "name": "Wireless Mouse",
+          "price": 25.5,
+          "tags": ["electronics", "accessories"]
+        },
+        {
+          "product_id": "p_202",
+          "name": "Keyboard",
+          "price": 45.0,
+          "tags": ["electronics"]
+        }
+      ],
+      "shipping": {
+        "address": {
+          "street": "123 Main St",
+          "city": "Berlin",
+          "geo": {
+            "lat": 52.52,
+            "lng": 13.405
+          }
+        },
+        "methods": ["standard", "express"]
+      }
+    }
+  ],
+  "analytics": {
+    "page_views": [12, 15, 9, 20],
+    "conversion_funnel": {
+      "steps": [
+        { "name": "visit", "users": 1000 },
+        { "name": "signup", "users": 300 },
+        { "name": "purchase", "users": 120 }
+      ]
+    }
+  }
+}

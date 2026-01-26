@@ -1,294 +1,270 @@
-Here are **clean, structured notes and explanations** for your code, focused on **`@property` decorators and controlled attribute access**.
+Great topic — `json` is one of the **most used standard libraries in Python**.
+
+I’ll teach it in a **structured, practical way**:
+what each function does, when to use it, and how they differ.
 
 ---
 
-# The Code (Context)
+# What is the `json` module?
 
-```python
-class teaLeaf:
-    def __init__(self, age):
-        self._age = age
-```
+> The `json` module is used to **convert between Python objects and JSON data**.
 
-Here:
+Two directions:
 
-* `_age` is a **protected attribute** (by convention).
-* Single underscore means: *“this is internal, don’t touch directly.”*
+* Python → JSON (serialization)
+* JSON → Python (deserialization)
 
 ---
 
-## 1. What is `@property`?
+# Core Functions in `json`
 
-```python
-@property
-def age(self):
-    return self._age + 2
-```
+These are the **4 main functions you must know**:
 
-### Definition
-
-> `@property` turns a method into a **read-only attribute**.
-
-So:
-
-```python
-leaf.age
-```
-
-Looks like a variable access,
-but actually calls a **method** behind the scenes.
-
-Internal meaning:
-
-```python
-leaf.age → leaf.age()
-```
-
-But with **attribute syntax**.
+| Function       | Direction            | Purpose                     |
+| -------------- | -------------------- | --------------------------- |
+| `json.dumps()` | Python → JSON string | Convert object to JSON text |
+| `json.loads()` | JSON string → Python | Parse JSON text             |
+| `json.dump()`  | Python → JSON file   | Write JSON to file          |
+| `json.load()`  | JSON file → Python   | Read JSON from file         |
 
 ---
 
-## 2. Why use `@property`?
+## 1. `json.dumps()` (object → string)
 
-It allows you to:
+```python
+import json
 
-* Add **logic to attribute access**
-* Keep **clean interface**
-* Hide internal implementation
-* Change behavior without breaking code
+data = {"tea": "masala", "sugar": 2}
+json_str = json.dumps(data)
+print(json_str)
+```
 
-This is called:
+Output:
 
-> **Encapsulation**
+```json
+{"tea": "masala", "sugar": 2}
+```
+
+### Use when:
+
+* Sending data over network
+* APIs
+* Logging
+* Storing in DB
 
 ---
 
-## 3. Setter: Controlling Assignment
+## 2. `json.loads()` (string → object)
 
 ```python
-@age.setter
-def age(self, age):
-    if 1 <= age <= 5:
-        self._age = age
-    else:
-        raise ValueError("Age must be between 1 and 5")
+json_str = '{"tea": "masala", "sugar": 2}'
+data = json.loads(json_str)
+print(data)
 ```
 
-Now:
+Output:
 
 ```python
-leaf.age = 4
+{'tea': 'masala', 'sugar': 2}
 ```
 
-Internally becomes:
+### Use when:
 
-```python
-leaf.age(4)
-```
-
-So:
-
-* You intercept assignments
-* You validate input
-* You prevent invalid state
+* Reading API responses
+* Parsing config
+* Processing JSON text
 
 ---
 
-## 4. Deleter: Controlling Deletion
+## 3. `json.dump()` (object → file)
 
 ```python
-@age.deleter
-def age(self):
-    del self._age
+with open("chai.json", "w") as f:
+    json.dump(data, f)
 ```
 
-Now:
-
-```python
-del leaf.age
-```
-
-Internally:
-
-```python
-del leaf._age
-```
-
-So you control **cleanup behavior**.
+Writes JSON into file.
 
 ---
 
-# Full Execution Flow
+## 4. `json.load()` (file → object)
 
 ```python
-leaf = teaLeaf(3)
-print(leaf.age)
+with open("chai.json") as f:
+    data = json.load(f)
 ```
 
-Calls getter:
-
-```
-returns 3 + 2 = 5
-```
+Reads JSON file into Python dict.
 
 ---
 
-```python
-leaf.age = 4
-print(leaf.age)
-```
+# Important Optional Parameters (Real World)
 
-Setter validates → sets `_age = 4`
-Getter returns `4 + 2 = 6`
+These make `json` powerful.
 
 ---
 
+## `indent` (pretty print)
+
 ```python
-leaf.age = 6
+json.dumps(data, indent=4)
 ```
 
-Fails validation:
-
-```
-ValueError: Age must be between 1 and 5
-```
-
-Program stops here.
+Readable formatted JSON.
 
 ---
 
-# Why `_age` and not `age`?
-
-Because:
-
-* `age` is now a **managed property**
-* `_age` is the **real storage variable**
-
-This avoids:
+## `sort_keys`
 
 ```python
-def age(self):
-    return self.age   # infinite recursion ❌
+json.dumps(data, sort_keys=True)
 ```
+
+Sorts keys alphabetically.
 
 ---
 
-# Property vs Normal Attribute
-
-### Without property
+## `ensure_ascii`
 
 ```python
-leaf.age = 10   # no validation, dangerous
+json.dumps("चाय", ensure_ascii=False)
 ```
 
-### With property
+Allows Unicode characters.
+
+---
+
+## `default` (custom objects)
 
 ```python
-leaf.age = 10   # blocked by validation
+def serialize(obj):
+    return obj.__dict__
+
+json.dumps(obj, default=serialize)
 ```
 
-Same syntax, totally different power.
+Used for:
+
+* Classes
+* Datetime
+* Complex objects
+
+---
+
+# Supported Data Types
+
+JSON can handle:
+
+| Python     | JSON       |
+| ---------- | ---------- |
+| dict       | object     |
+| list       | array      |
+| str        | string     |
+| int/float  | number     |
+| True/False | true/false |
+| None       | null       |
+
+Not supported:
+
+* set
+* tuple
+* custom objects (without `default`)
+
+---
+
+# json vs pickle (important)
+
+| Feature           | json | pickle |
+| ----------------- | ---- | ------ |
+| Human readable    | ✅    | ❌      |
+| Secure            | ✅    | ❌      |
+| Cross-language    | ✅    | ❌      |
+| Can store classes | ❌    | ✅      |
+| Used in APIs      | ✅    | ❌      |
 
 ---
 
 # Mental Model 🧠
 
-Think of `@property` as:
+Think of `json` as a **translator**:
 
-> A **security guard in front of a variable**
-
-Every access goes through:
-
-* Getter
-* Setter
-* Deleter
-
-You never touch the variable directly.
-
----
-
-# Real-World Analogy
-
-Bank account:
-
-```python
-account.balance
+```
+Python objects  ⇄  JSON text
 ```
 
-Looks simple, but internally:
+Used whenever:
 
-* Checks permissions
-* Applies rules
-* Logs activity
-* Validates transactions
-
-That is exactly what `@property` enables.
+* Python talks to web
+* Python talks to frontend
+* Python stores structured data
 
 ---
 
-# When to Use `@property`
+# Internal Architecture (important)
 
-Use it when:
+`json` internally:
 
-* You need validation
-* You need computed values
-* You need read-only fields
-* You need backward compatibility
-* You want to hide internals
+* Tokenizes text
+* Builds parse tree
+* Maps JSON types to Python types
+* Serializes objects recursively
+
+It is a **parser + serializer**.
 
 ---
 
-# Property vs Getter/Setter (Old Style)
+# Real World Usage Patterns
 
-Old Java style:
+### API response
 
 ```python
-getAge()
-setAge()
+response = requests.get(url)
+data = response.json()
 ```
 
-Pythonic style:
+### Config files
 
 ```python
-obj.age
-obj.age = 5
+config = json.load(open("config.json"))
 ```
 
-With logic inside.
+### Database storage
+
+```python
+db.save(json.dumps(obj))
+```
 
 ---
 
-# Key Differences Table
+# Complete Function Index (json module)
 
-| Feature         | Normal attribute | Property |
-| --------------- | ---------------- | -------- |
-| Syntax          | `obj.x`          | `obj.x`  |
-| Logic           | ❌ None           | ✅ Yes    |
-| Validation      | ❌                | ✅        |
-| Computed values | ❌                | ✅        |
-| Encapsulation   | ❌                | ✅        |
-| Clean API       | ❌                | ✅        |
+| Function      | Purpose              |
+| ------------- | -------------------- |
+| `dumps()`     | Object → JSON string |
+| `loads()`     | JSON string → object |
+| `dump()`      | Object → file        |
+| `load()`      | File → object        |
+| `JSONEncoder` | Custom encoding      |
+| `JSONDecoder` | Custom decoding      |
+
+(Last two are advanced, used for frameworks)
 
 ---
 
-# One-Line Interview Takeaway (Gold)
+# One-line Interview Takeaway (Gold)
 
-> **`@property` allows methods to behave like attributes, enabling controlled access, validation, and computed values while preserving clean syntax.**
+> **The `json` module serializes Python objects into JSON and deserializes JSON back into Python, enabling data exchange between systems.**
 
 ---
 
 # Final Key Insight
 
-This pattern is used everywhere in:
+If you understand `json`, you understand:
 
-* Django models
-* ORMs
-* Dataclasses
-* Pydantic
-* Framework internals
+* REST APIs
+* Microservices
+* Frontend-backend communication
+* Config systems
+* Cloud systems
 
-Understanding properties means you understand:
-
-> **How Python achieves encapsulation without ugly getter/setter methods.**
-
-This is **advanced Python OOP design**, not just syntax.
+This is **not optional knowledge** — it is **core software engineering skill**.
